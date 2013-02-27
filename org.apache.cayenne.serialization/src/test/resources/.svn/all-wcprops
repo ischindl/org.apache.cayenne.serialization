@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/repos/asf/!svn/ver/815515/cayenne/sandbox/cayenne-serialization/src/test/resources
+END
+cayenne.xml
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/repos/asf/!svn/ver/815515/cayenne/sandbox/cayenne-serialization/src/test/resources/cayenne.xml
+END
+serialization.map.xml
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/repos/asf/!svn/ver/815515/cayenne/sandbox/cayenne-serialization/src/test/resources/serialization.map.xml
+END
+serialization.driver.xml
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/repos/asf/!svn/ver/815515/cayenne/sandbox/cayenne-serialization/src/test/resources/serialization.driver.xml
+END
