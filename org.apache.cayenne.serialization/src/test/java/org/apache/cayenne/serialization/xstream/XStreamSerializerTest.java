@@ -76,7 +76,7 @@ public class XStreamSerializerTest extends SerializationCase {
 
 		assertEquals("<Table2><name>t21</name><table1>"
 				+ "<Table1><name>t11</name></Table1></table1></Table2>", Util
-				.stringFromFile(file).trim());
+				.stringFromFile(file).trim().replaceAll("[ ,\n]*", ""));
 	}
 
 	public void testSerializeByValueToMany() throws IOException {
@@ -111,7 +111,7 @@ public class XStreamSerializerTest extends SerializationCase {
 
 		assertEquals("<Table1><name>t11</name><table2s>"
 				+ "<Table2><name>t21</name></Table2>" + "</table2s></Table1>",
-				Util.stringFromFile(file).trim());
+				Util.stringFromFile(file).trim().replaceAll("[ ,\n]*", ""));
 	}
 
 	public void testSerializeByReferenceToOne() throws IOException {
@@ -149,7 +149,7 @@ public class XStreamSerializerTest extends SerializationCase {
 		assertEquals(
 				"<Table2><name>t21</name><table1><Table1 ref=\"true\"><PK>"
 						+ id + "</PK></Table1></table1></Table2>", Util
-						.stringFromFile(file).trim());
+						.stringFromFile(file).trim().replaceAll("[\n]", "").replaceAll(">[ ]*<", "><"));
 	}
 
 	public void testExcludeAttribute() throws IOException {
@@ -179,7 +179,7 @@ public class XStreamSerializerTest extends SerializationCase {
 		assertTrue(f1.length() > 0);
 
 		assertEquals("<Table1><name>t11</name></Table1>", Util.stringFromFile(
-				f1).trim());
+				f1).trim().replaceAll("[ ,\n]*", ""));
 
 		subgraph.excludeAttribute(Table1.NAME_PROPERTY);
 
@@ -195,7 +195,7 @@ public class XStreamSerializerTest extends SerializationCase {
 		assertTrue(f2.isFile());
 		assertTrue(f2.length() > 0);
 
-		assertEquals("<Table1/>", Util.stringFromFile(f2).trim());
+		assertEquals("<Table1/>", Util.stringFromFile(f2).trim().replaceAll("[ ,\n]*", ""));
 
 	}
 

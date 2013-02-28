@@ -18,19 +18,18 @@
  ****************************************************************/
 package org.apache.cayenne.serialization;
 
-import java.io.InputStream;
-
-import org.apache.cayenne.ObjectContext;
+import java.io.Reader;
 
 import junit.framework.TestCase;
+
+import org.apache.cayenne.ObjectContext;
 
 public class BaseDeserializerTest extends TestCase {
 
 	public void testCommitCountThreshould() {
 		BaseDeserializer deserializer = new BaseDeserializer() {
 			@Override
-			public <T> T deserialize(ObjectContext context,
-					Subgraph<T> subgraph, InputStream in) {
+			public <T> T deserialize(ObjectContext context, Subgraph<T> subgraph, Reader in) {
 				return null;
 			}
 		};

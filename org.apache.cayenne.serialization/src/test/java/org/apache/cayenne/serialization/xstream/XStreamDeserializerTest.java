@@ -21,6 +21,7 @@ package org.apache.cayenne.serialization.xstream;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,7 +53,7 @@ public class XStreamDeserializerTest extends SerializationCase {
 		String xml = "<Table1><name>t11</name></Table1>";
 
 		Table1 result;
-		InputStream in = new ByteArrayInputStream(xml.getBytes());
+		StringReader in = new StringReader(xml);
 		try {
 			result = deserializer.deserialize(context, subgraph, in);
 		} finally {
@@ -85,7 +86,7 @@ public class XStreamDeserializerTest extends SerializationCase {
 		String xml = "<Table2><name>t21</name><table1><Table1><name>t11</name></Table1></table1></Table2>";
 
 		Table2 result;
-		InputStream in = new ByteArrayInputStream(xml.getBytes());
+		StringReader in = new StringReader(xml);
 		try {
 			result = deserializer.deserialize(context, subgraph, in);
 		} finally {
@@ -128,7 +129,7 @@ public class XStreamDeserializerTest extends SerializationCase {
 				+ id + "</PK></Table1></table1></Table2>";
 
 		Table2 result;
-		InputStream in = new ByteArrayInputStream(xml.getBytes());
+		StringReader in = new StringReader(xml);
 		try {
 			result = deserializer.deserialize(context, subgraph, in);
 		} finally {
@@ -162,7 +163,7 @@ public class XStreamDeserializerTest extends SerializationCase {
 				+ "<Table2><name>t22</name></Table2></table2s></Table1>";
 
 		Table1 result;
-		InputStream in = new ByteArrayInputStream(xml.getBytes());
+		StringReader in = new StringReader(xml);
 		try {
 			result = deserializer.deserialize(context, subgraph, in);
 		} finally {
@@ -219,7 +220,7 @@ public class XStreamDeserializerTest extends SerializationCase {
 		String xml = "<Table2><name>t21</name><table1><Table1 ref=\"true\"><PK>"
 				+ id + "</PK></Table1></table1></Table2>";
 
-		InputStream in = new ByteArrayInputStream(xml.getBytes());
+		StringReader in = new StringReader(xml);
 		try {
 			deserializer.deserialize(context, subgraph, in);
 		} finally {
@@ -260,7 +261,7 @@ public class XStreamDeserializerTest extends SerializationCase {
 				+ "<Table2><name>t21</name></Table2>"
 				+ "<Table2><name>t22</name></Table2></table2s></Table1>";
 
-		InputStream in = new ByteArrayInputStream(xml.getBytes());
+		StringReader in = new StringReader(xml);
 		try {
 			deserializer.deserialize(context, subgraph, in);
 		} finally {
