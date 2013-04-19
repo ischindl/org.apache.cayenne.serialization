@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Serialization
 Bundle-SymbolicName: org.apache.cayenne.serialization
-Bundle-Version: 3.2.0
+Bundle-Version: 3.2.0.M1-qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: com.thoughtworks.xstream,
  com.thoughtworks.xstream.annotations,
@@ -38,18 +38,18 @@ Import-Package: com.thoughtworks.xstream,
  org.apache.cayenne.reflect,
  org.apache.cayenne.util,
  org.apache.commons.logging,
- org.xmlpull.mxp1,
- org.xmlpull.mxp1_serializer,
- org.xmlpull.v1,
- org.xmlpull.v1.builder,
- org.xmlpull.v1.builder.adapter,
- org.xmlpull.v1.builder.impl,
- org.xmlpull.v1.dom2_builder,
- org.xmlpull.v1.parser_pool,
- org.xmlpull.v1.sax2,
- org.xmlpull.v1.util,
- org.xmlpull.v1.wrapper,
- org.xmlpull.v1.wrapper.classic
+ org.xmlpull.mxp1;resolution:=optional,
+ org.xmlpull.mxp1_serializer;resolution:=optional,
+ org.xmlpull.v1;resolution:=optional,
+ org.xmlpull.v1.builder;resolution:=optional,
+ org.xmlpull.v1.builder.adapter;resolution:=optional,
+ org.xmlpull.v1.builder.impl;resolution:=optional,
+ org.xmlpull.v1.dom2_builder;resolution:=optional,
+ org.xmlpull.v1.parser_pool;resolution:=optional,
+ org.xmlpull.v1.sax2;resolution:=optional,
+ org.xmlpull.v1.util;resolution:=optional,
+ org.xmlpull.v1.wrapper;resolution:=optional,
+ org.xmlpull.v1.wrapper.classic;resolution:=optional
 Require-Bundle: org.junit;resolution:=optional
 Bundle-ClassPath: .
 Export-Package: org.apache.cayenne.serialization,

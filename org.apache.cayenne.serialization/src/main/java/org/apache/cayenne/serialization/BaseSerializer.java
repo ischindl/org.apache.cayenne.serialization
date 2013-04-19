@@ -18,14 +18,13 @@
  ****************************************************************/
 package org.apache.cayenne.serialization;
 
-import java.io.OutputStream;
+import java.io.Writer;
 
 public abstract class BaseSerializer implements SubgraphSerializer {
 
 	protected int statementFetchSize;
 
-	public abstract <T> void serialize(T object, Subgraph<T> subgraph,
-			OutputStream out);
+	public abstract <T> void serialize(T object, Subgraph<T> subgraph, Writer out);
 
 	public int getStatementFetchSize() {
 		return statementFetchSize;

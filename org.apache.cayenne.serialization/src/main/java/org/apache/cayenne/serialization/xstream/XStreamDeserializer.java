@@ -44,16 +44,12 @@ public class XStreamDeserializer extends BaseDeserializer {
 
 		long t0 = System.currentTimeMillis();
 
-		XStream xstream = createXStream(subgraph.getRootNode()
-				.getClassDescriptor());
+		XStream xstream = createXStream(subgraph.getRootNode().getClassDescriptor());
 
-		int commitCountThreshold = isCommitting() ? getCommitCountThreshold()
-				: 0;
+		int commitCountThreshold = isCommitting() ? getCommitCountThreshold() : 0;
 
-		xstream.registerConverter(new PersistentDeserializeConverter(subgraph
-				.getRootNode(), context, commitCountThreshold));
-		xstream.registerConverter(new ObjectIdConverter(context
-				.getEntityResolver()));
+		xstream.registerConverter(new PersistentDeserializeConverter(subgraph.getRootNode(), context, commitCountThreshold));
+		xstream.registerConverter(new ObjectIdConverter(context.getEntityResolver()));
 
 		T object;
 
@@ -74,8 +70,7 @@ public class XStreamDeserializer extends BaseDeserializer {
 		// since multiple intermediate context commits are possible, wrap them
 		// in a manual transaction to allow for atomic rollback
 
-		Transaction tx = ((DataContext) context).getParentDataDomain()
-				.createTransaction();
+		Transaction tx = ((DataContext) context).getParentDataDomain().createTransaction();
 
 		Transaction.bindThreadTransaction(tx);
 
@@ -111,7 +106,7 @@ public class XStreamDeserializer extends BaseDeserializer {
 		// serialized objects...
 		xstream.setMode(XStream.NO_REFERENCES);
 
-		((CompositeClassLoader)xstream.getClassLoader()).add(rootDescriptor.getObjectClass().getClassLoader());
+		((CompositeClassLoader) xstream.getClassLoader()).add(rootDescriptor.getObjectClass().getClassLoader());
 		// TODO: we need to implement our own algorithm for object cycle
 		// detection... XStream also supports Immutable classes. we may classify
 		// objects according to their participation in a cycle.

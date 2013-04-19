@@ -18,11 +18,10 @@
  ****************************************************************/
 package org.apache.cayenne.serialization.xstream;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.io.StringWriter;
 
 import org.apache.cayenne.Cayenne;
 import org.apache.cayenne.ObjectContext;
@@ -64,7 +63,7 @@ public class XStreamSerializerTest extends SerializationCase {
 		XStreamSerializer serializer = new XStreamSerializer();
 		serializer.setCreatingCompactXML(true);
 
-		FileOutputStream out = new FileOutputStream(file);
+		FileWriter out = new FileWriter(file);
 		try {
 			serializer.serialize(t21, subgraph, out);
 		} finally {
@@ -99,7 +98,7 @@ public class XStreamSerializerTest extends SerializationCase {
 		XStreamSerializer serializer = new XStreamSerializer();
 		serializer.setCreatingCompactXML(true);
 
-		FileOutputStream out = new FileOutputStream(file);
+		FileWriter out = new FileWriter(file);
 		try {
 			serializer.serialize(t11, subgraph, out);
 		} finally {
@@ -134,7 +133,7 @@ public class XStreamSerializerTest extends SerializationCase {
 		XStreamSerializer serializer = new XStreamSerializer();
 		serializer.setCreatingCompactXML(true);
 
-		FileOutputStream out = new FileOutputStream(file);
+		FileWriter out = new FileWriter(file);
 		try {
 			serializer.serialize(t21, subgraph, out);
 		} finally {
@@ -168,7 +167,7 @@ public class XStreamSerializerTest extends SerializationCase {
 
 		File f1 = tempFile(".xml");
 
-		FileOutputStream out = new FileOutputStream(f1);
+		FileWriter out = new FileWriter(f1);
 		try {
 			serializer.serialize(t11, subgraph, out);
 		} finally {
@@ -185,7 +184,7 @@ public class XStreamSerializerTest extends SerializationCase {
 
 		File f2 = tempFile(".xml");
 
-		FileOutputStream out2 = new FileOutputStream(f2);
+		FileWriter out2 = new FileWriter(f2);
 		try {
 			serializer.serialize(t11, subgraph, out2);
 		} finally {
@@ -228,7 +227,7 @@ public class XStreamSerializerTest extends SerializationCase {
 		XStreamSerializer serializer = new XStreamSerializer();
 		serializer.setCreatingCompactXML(true);
 
-		OutputStream out = new ByteArrayOutputStream();
+		StringWriter out = new StringWriter();
 		try {
 			serializer.serialize(t11, subgraph, out);
 		} finally {

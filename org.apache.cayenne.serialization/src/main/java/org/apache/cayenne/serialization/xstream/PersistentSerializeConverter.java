@@ -18,6 +18,8 @@
  ****************************************************************/
 package org.apache.cayenne.serialization.xstream;
 
+import java.util.Map;
+
 import org.apache.cayenne.Cayenne;
 import org.apache.cayenne.CayenneException;
 import org.apache.cayenne.CayenneRuntimeException;
@@ -42,6 +44,7 @@ import com.thoughtworks.xstream.converters.MarshallingContext;
 import com.thoughtworks.xstream.converters.UnmarshallingContext;
 import com.thoughtworks.xstream.io.HierarchicalStreamReader;
 import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
 
 class PersistentSerializeConverter implements Converter {
 
@@ -57,48 +60,59 @@ class PersistentSerializeConverter implements Converter {
 
 	public void marshal(Object object, HierarchicalStreamWriter writer, MarshallingContext context) {
 
-		SerializerStack serializerContext = getStack(context);
-
-		SubgraphNode node = serializerContext.peekNode();
-
-		// don't generate tags for the root node, as they are generated via the
-		// 'alias' mechanism
-		if (node.getIncomingProperty() != null) {
+		if (subgraph.getRootNode().isSerializedByReference()) {
 			Persistent persistent = (Persistent) object;
-			writer.startNode(persistent.getObjectId().getEntityName());
-		}
+			((PrettyPrintWriter)writer).addAttribute(Attributes.ref.name(), "true");
+			for (Map.Entry<String, Object> entry : persistent.getObjectId().getIdSnapshot().entrySet()) {
 
-		for (AttributeProperty property : node.getAttributeProperties()) {
-			marshalAttribute(object, property, writer, context);
-		}
+				writer.startNode(entry.getKey());
+				context.convertAnother(entry.getValue());
+				writer.endNode();
+			}
+		} else {
+			SerializerStack serializerContext = getStack(context);
 
-		// marshal specified related entities
-		for (SubgraphNode child : node.getChildren()) {
+			SubgraphNode node = serializerContext.peekNode();
 
-			serializerContext.pushNode(child);
+			// don't generate tags for the root node, as they are generated via the
+			// 'alias' mechanism
+			if (node.getIncomingProperty() != null) {
+				Persistent persistent = (Persistent) object;
+				writer.startNode(persistent.getObjectId().getEntityName());
+			}
 
-			Query query = null;
-			for (SerializationCallback callback : child.getSerializationCallbacks()) {
-				query = callback.relationshipQuery(child, object);
-				if (query != null) {
-					break;
+			for (AttributeProperty property : node.getAttributeProperties()) {
+				marshalAttribute(object, property, writer, context);
+			}
+
+			// marshal specified related entities
+			for (SubgraphNode child : node.getChildren()) {
+
+				serializerContext.pushNode(child);
+
+				Query query = null;
+				for (SerializationCallback callback : child.getSerializationCallbacks()) {
+					query = callback.relationshipQuery(child, object);
+					if (query != null) {
+						break;
+					}
 				}
+
+				ArcProperty incoming = child.getIncomingProperty();
+				boolean byReference = child.isSerializedByReference();
+
+				if (incoming.getRelationship().isToMany()) {
+					marshalToMany(object, incoming, writer, context, byReference, query);
+				} else {
+					marshalToOne(object, incoming, writer, context, byReference, query);
+				}
+
+				serializerContext.popNode();
 			}
 
-			ArcProperty incoming = child.getIncomingProperty();
-			boolean byReference = child.isSerializedByReference();
-
-			if (incoming.getRelationship().isToMany()) {
-				marshalToMany(object, incoming, writer, context, byReference, query);
-			} else {
-				marshalToOne(object, incoming, writer, context, byReference, query);
+			if (node.getIncomingProperty() != null) {
+				writer.endNode();
 			}
-
-			serializerContext.popNode();
-		}
-
-		if (node.getIncomingProperty() != null) {
-			writer.endNode();
 		}
 	}
 

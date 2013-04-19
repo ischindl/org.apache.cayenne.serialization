@@ -106,7 +106,7 @@ public class SubgraphNode {
 		return serializedByReference;
 	}
 
-	void setSerializedByReference(boolean reference) {
+	public void setSerializedByReference(boolean reference) {
 		this.serializedByReference = reference;
 	}
 

@@ -18,7 +18,7 @@
  ****************************************************************/
 package org.apache.cayenne.serialization.xstream;
 
-import java.io.OutputStream;
+import java.io.Writer;
 
 import org.apache.cayenne.reflect.ClassDescriptor;
 import org.apache.cayenne.serialization.BaseSerializer;
@@ -32,7 +32,7 @@ public class XStreamSerializer extends BaseSerializer {
 	protected boolean creatingCompactXML;
 
 	@Override
-	public <T> void serialize(T object, Subgraph<T> subgraph, OutputStream out) {
+	public <T> void serialize(T object, Subgraph<T> subgraph, Writer out) {
 
 		// TODO: make sure all the converters are stateless... then we can cache
 		// xstream instances by subgraph and reuse them

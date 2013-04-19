@@ -29,7 +29,8 @@ public class BaseDeserializerTest extends TestCase {
 	public void testCommitCountThreshould() {
 		BaseDeserializer deserializer = new BaseDeserializer() {
 			@Override
-			public <T> T deserialize(ObjectContext context, Subgraph<T> subgraph, Reader in) {
+			public <T> T deserialize(ObjectContext context,
+					Subgraph<T> subgraph, Reader in) {
 				return null;
 			}
 		};
