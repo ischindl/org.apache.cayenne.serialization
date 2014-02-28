@@ -28,7 +28,6 @@ import org.apache.cayenne.access.DataDomain;
 import org.apache.cayenne.access.DataNode;
 import org.apache.cayenne.access.DbGenerator;
 import org.apache.cayenne.configuration.server.ServerRuntime;
-import org.apache.cayenne.log.CommonsJdbcEventLogger;
 import org.apache.cayenne.map.DataMap;
 
 public abstract class SerializationCase extends TestCase {
@@ -49,7 +48,7 @@ public abstract class SerializationCase extends TestCase {
 			DataNode node = domain.getDataNodes().iterator().next();
 			DataMap dataMap = domain.getDataMaps().iterator().next();
 
-			DbGenerator dbGenerator = new DbGenerator(node.getAdapter(), dataMap, new CommonsJdbcEventLogger());
+			DbGenerator dbGenerator = new DbGenerator(node.getAdapter(), dataMap, node.getJdbcEventLogger());
 			dbGenerator.setShouldDropPKSupport(true);
 			dbGenerator.setShouldCreatePKSupport(true);
 

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Serialization
 Bundle-SymbolicName: org.apache.cayenne.serialization
-Bundle-Version: 3.2.0.M1-qualifier
+Bundle-Version: 3.2.0.M2-qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: com.thoughtworks.xstream,
  com.thoughtworks.xstream.annotations,

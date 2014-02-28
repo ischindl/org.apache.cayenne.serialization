@@ -21,20 +21,18 @@ package org.apache.cayenne.serialization.xstream;
 import java.util.Map;
 
 import org.apache.cayenne.Cayenne;
-import org.apache.cayenne.CayenneException;
 import org.apache.cayenne.CayenneRuntimeException;
 import org.apache.cayenne.DataObject;
 import org.apache.cayenne.DataRow;
 import org.apache.cayenne.ObjectContext;
 import org.apache.cayenne.Persistent;
 import org.apache.cayenne.access.DataContext;
-import org.apache.cayenne.access.ResultIterator;
+import org.apache.cayenne.ResultIterator;
 import org.apache.cayenne.query.Query;
 import org.apache.cayenne.query.RelationshipQuery;
 import org.apache.cayenne.reflect.ArcProperty;
 import org.apache.cayenne.reflect.AttributeProperty;
 import org.apache.cayenne.reflect.PropertyDescriptor;
-
 import org.apache.cayenne.serialization.SerializationCallback;
 import org.apache.cayenne.serialization.Subgraph;
 import org.apache.cayenne.serialization.SubgraphNode;
@@ -182,7 +180,7 @@ class PersistentSerializeConverter implements Converter {
 			} finally {
 				it.close();
 			}
-		} catch (CayenneException e) {
+		} catch (Exception e) {
 			throw new CayenneRuntimeException("Error reading relationship " + arc.getName(), e);
 		}
 
